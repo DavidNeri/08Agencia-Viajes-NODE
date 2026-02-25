@@ -1,0 +1,38 @@
+extends ../layout/index
+
+block contenido
+    main
+        .row.d-flex.justify-content-center
+            h1=pagina
+        .row.d-flex.justify-content-center
+            h2 Contanos tu experiencia                
+
+
+        .d-flex.justify-content-center                
+            .col-lg-3
+                if(err)
+                    each error in err
+                        .row.bg-danger.text-white.rounded.m-2            
+                            p=error.mensaje
+                form#frm(action="/testimoniales" method="POST")
+                    .form-group
+                        label(for='nombre') Nombre
+                        input#nombre.form-control(type='text', name='nombre', value=nombre)
+                    .form-group
+                        label(for='email') Correo
+                        input#email.form-control(type='email', placeholder='direccion@ejemplo.com', name='email', value = email)
+                    .form-group
+                        label(for='testimonio') Tu experiencia
+                        textarea#experiencia.form-control(rows='5', name='testimonio')
+                    .d-flex.justify-content-center
+                        button.btn.btn-info.w-75(type='submit') Enviar
+
+        .row.d-flex.justify-content-center.mt-5
+            if(listadoTestimonios)
+                each t in listadoTestimonios
+                    .card.bg-light.mb-3.ml-2(style='max-width: 15rem;min-width: 15rem')
+                        .card-header #{t.nombre}
+                        .card-body
+                            p.card-text
+                            | #{t.testimonio}.
+                                        
