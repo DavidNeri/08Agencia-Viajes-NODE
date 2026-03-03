@@ -1,11 +1,20 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
+
 import express from 'express';
 import router from './routes/index.js'
 import dataBase from './config/db.js'
+
+
 //const express = require('express');
+
 const app = express();
 
 //Definir puerto
 const port = process.env.port || 3500;
+
+
 
 //conectar a la base de datos
 dataBase.authenticate()
